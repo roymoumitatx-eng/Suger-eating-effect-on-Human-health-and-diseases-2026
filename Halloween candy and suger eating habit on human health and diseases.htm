@@ -1,0 +1,720 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 15 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Aptos;}
+@font-face
+	{font-family:"Segoe UI Emoji";
+	panose-1:2 11 5 2 4 2 4 2 2 3;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:8.0pt;
+	margin-left:0in;
+	line-height:107%;
+	font-size:11.0pt;
+	font-family:"Aptos",sans-serif;}
+.MsoChpDefault
+	{font-size:11.0pt;
+	font-family:"Aptos",sans-serif;}
+.MsoPapDefault
+	{margin-bottom:8.0pt;
+	line-height:107%;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US style='word-wrap:break-word'>
+
+<div class=WordSection1>
+
+<p class=MsoNormal>&lt;!DOCTYPE html&gt;</p>
+
+<p class=MsoNormal>&lt;html lang=&quot;en&quot;&gt;</p>
+
+<p class=MsoNormal>&lt;head&gt;</p>
+
+<p class=MsoNormal>    &lt;meta charset=&quot;UTF-8&quot;&gt;</p>
+
+<p class=MsoNormal>    &lt;meta name=&quot;viewport&quot;
+content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</p>
+
+<p class=MsoNormal>    &lt;title&gt;Disease Analytics &amp; Decision Tree
+Dashboard&lt;/title&gt;</p>
+
+<p class=MsoNormal>    &lt;!-- Chart.js CDN --&gt;</p>
+
+<p class=MsoNormal>    &lt;script
+src=&quot;https://cdn.jsdelivr.net/npm/chart.js&quot;&gt;&lt;/script&gt;</p>
+
+<p class=MsoNormal>    &lt;style&gt;</p>
+
+<p class=MsoNormal>        * {</p>
+
+<p class=MsoNormal>            box-sizing: border-box;</p>
+
+<p class=MsoNormal>            margin: 0;</p>
+
+<p class=MsoNormal>            padding: 0;</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        body {</p>
+
+<p class=MsoNormal>            background-color: #080c14;</p>
+
+<p class=MsoNormal>            color: #ffffff;</p>
+
+<p class=MsoNormal>            font-family: -apple-system, BlinkMacSystemFont,
+&quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif;</p>
+
+<p class=MsoNormal>            padding: 24px;</p>
+
+<p class=MsoNormal>            min-height: 100vh;</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        header {</p>
+
+<p class=MsoNormal>            margin-bottom: 24px;</p>
+
+<p class=MsoNormal>            border-bottom: 1px solid #1f2937;</p>
+
+<p class=MsoNormal>            padding-bottom: 16px;</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        header h1 {</p>
+
+<p class=MsoNormal>            font-size: 22px;</p>
+
+<p class=MsoNormal>            color: #38bdf8;</p>
+
+<p class=MsoNormal>            margin-bottom: 6px;</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        header p {</p>
+
+<p class=MsoNormal>            font-size: 13px;</p>
+
+<p class=MsoNormal>            color: #9ca3af;</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        /* Section Navigation Tabs */</p>
+
+<p class=MsoNormal>        .section-title {</p>
+
+<p class=MsoNormal>            font-size: 16px;</p>
+
+<p class=MsoNormal>            font-weight: 600;</p>
+
+<p class=MsoNormal>            color: #f59e0b;</p>
+
+<p class=MsoNormal>            margin: 32px 0 16px;</p>
+
+<p class=MsoNormal>            text-transform: uppercase;</p>
+
+<p class=MsoNormal>            letter-spacing: 0.5px;</p>
+
+<p class=MsoNormal>            border-left: 4px solid #f59e0b;</p>
+
+<p class=MsoNormal>            padding-left: 10px;</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        /* Mental Map Container */</p>
+
+<p class=MsoNormal>        .viewport {</p>
+
+<p class=MsoNormal>            position: relative;</p>
+
+<p class=MsoNormal>            width: 100%;</p>
+
+<p class=MsoNormal>            height: 600px;</p>
+
+<p class=MsoNormal>            background: radial-gradient(circle at center,
+#0f172a 0%, #080c14 85%);</p>
+
+<p class=MsoNormal>            border: 1px solid #1f2937;</p>
+
+<p class=MsoNormal>            border-radius: 12px;</p>
+
+<p class=MsoNormal>            overflow: hidden;</p>
+
+<p class=MsoNormal>            margin-bottom: 30px;</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        .diagram-container {</p>
+
+<p class=MsoNormal>            position: absolute;</p>
+
+<p class=MsoNormal>            width: 1400px;</p>
+
+<p class=MsoNormal>            height: 600px;</p>
+
+<p class=MsoNormal>            top: 50%;</p>
+
+<p class=MsoNormal>            left: 50%;</p>
+
+<p class=MsoNormal>            transform: translate(-50%, -50%);</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        .central-hub {</p>
+
+<p class=MsoNormal>            position: absolute;</p>
+
+<p class=MsoNormal>            top: 50%;</p>
+
+<p class=MsoNormal>            left: 50%;</p>
+
+<p class=MsoNormal>            transform: translate(-50%, -50%);</p>
+
+<p class=MsoNormal>            text-align: center;</p>
+
+<p class=MsoNormal>            z-index: 10;</p>
+
+<p class=MsoNormal>            background: linear-gradient(135deg, #0284c7,
+#38bdf8);</p>
+
+<p class=MsoNormal>            border-radius: 50%;</p>
+
+<p class=MsoNormal>            width: 100px;</p>
+
+<p class=MsoNormal>            height: 100px;</p>
+
+<p class=MsoNormal>            display: flex;</p>
+
+<p class=MsoNormal>            align-items: center;</p>
+
+<p class=MsoNormal>            justify-content: center;</p>
+
+<p class=MsoNormal>            font-size: 40px;</p>
+
+<p class=MsoNormal>            box-shadow: 0 0 35px rgba(56, 189, 248, 0.4);</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        .node {</p>
+
+<p class=MsoNormal>            position: absolute;</p>
+
+<p class=MsoNormal>            background: #111827;</p>
+
+<p class=MsoNormal>            border: 1px solid #1f2937;</p>
+
+<p class=MsoNormal>            border-radius: 8px;</p>
+
+<p class=MsoNormal>            padding: 10px 14px;</p>
+
+<p class=MsoNormal>            font-size: 12px;</p>
+
+<p class=MsoNormal>            text-align: center;</p>
+
+<p class=MsoNormal>            box-shadow: 0 6px 16px rgba(0,0,0,0.5);</p>
+
+<p class=MsoNormal>            max-width: 180px;</p>
+
+<p class=MsoNormal>            z-index: 5;</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        .node.blue { border-color: #38bdf8; color: #bae6fd;
+}</p>
+
+<p class=MsoNormal>        .node.purple { border-color: #a855f7; color:
+#e9d5ff; }</p>
+
+<p class=MsoNormal>        .node.amber { border-color: #f59e0b; color: #fde68a;
+}</p>
+
+<p class=MsoNormal>        .node.rose { border-color: #f43f5e; color: #fecdd3;
+}</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        .node h4 { font-size: 10px; text-transform:
+uppercase; margin-bottom: 4px; opacity: 0.8; }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        svg { position: absolute; top: 0; left: 0; width:
+100%; height: 100%; pointer-events: none; z-index: 1; }</p>
+
+<p class=MsoNormal>        path { stroke: #1f2937; stroke-width: 2; fill: none;
+}</p>
+
+<p class=MsoNormal>        .path-blue { stroke: rgba(56, 189, 248, 0.4); }</p>
+
+<p class=MsoNormal>        .path-purple { stroke: rgba(168, 85, 247, 0.4); }</p>
+
+<p class=MsoNormal>        .path-amber { stroke: rgba(245, 158, 11, 0.4); }</p>
+
+<p class=MsoNormal>        .path-rose { stroke: rgba(244, 63, 94, 0.4); }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        /* Grid for Graphs */</p>
+
+<p class=MsoNormal>        .grid-container {</p>
+
+<p class=MsoNormal>            display: grid;</p>
+
+<p class=MsoNormal>            grid-template-columns: repeat(auto-fit,
+minmax(420px, 1fr));</p>
+
+<p class=MsoNormal>            gap: 20px;</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        .chart-card {</p>
+
+<p class=MsoNormal>            background: #111827;</p>
+
+<p class=MsoNormal>            border: 1px solid #1f2937;</p>
+
+<p class=MsoNormal>            border-radius: 12px;</p>
+
+<p class=MsoNormal>            padding: 20px;</p>
+
+<p class=MsoNormal>            box-shadow: 0 8px 24px rgba(0,0,0,0.4);</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        .chart-card h3 {</p>
+
+<p class=MsoNormal>            font-size: 14px;</p>
+
+<p class=MsoNormal>            color: #38bdf8;</p>
+
+<p class=MsoNormal>            margin-bottom: 4px;</p>
+
+<p class=MsoNormal>            text-transform: uppercase;</p>
+
+<p class=MsoNormal>            letter-spacing: 0.5px;</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        .chart-card p {</p>
+
+<p class=MsoNormal>            font-size: 11px;</p>
+
+<p class=MsoNormal>            color: #9ca3af;</p>
+
+<p class=MsoNormal>            margin-bottom: 16px;</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        .chart-wrapper {</p>
+
+<p class=MsoNormal>            position: relative;</p>
+
+<p class=MsoNormal>            height: 260px;</p>
+
+<p class=MsoNormal>            width: 100%;</p>
+
+<p class=MsoNormal>        }</p>
+
+<p class=MsoNormal>    &lt;/style&gt;</p>
+
+<p class=MsoNormal>&lt;/head&gt;</p>
+
+<p class=MsoNormal>&lt;body&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&lt;header&gt;</p>
+
+<p class=MsoNormal>    &lt;h1&gt;<span style='font-family:"Segoe UI Emoji",sans-serif'>&#129658;</span>
+Multi-Disease Analytics Dashboard&lt;/h1&gt;</p>
+
+<p class=MsoNormal>    &lt;p&gt;Comparing Univariate, Bivariate, and Decision
+Tree Models across Dental, Metabolic, Blood Lipid/Pressure Diseases, and
+Diagnostic Evaluation Costs.&lt;/p&gt;</p>
+
+<p class=MsoNormal>&lt;/header&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&lt;!-- SECTION 1: MENTAL MAP --&gt;</p>
+
+<p class=MsoNormal>&lt;div class=&quot;section-title&quot;&gt;1. Disease &amp;
+Statistical Method Mental Map&lt;/div&gt;</p>
+
+<p class=MsoNormal>&lt;div class=&quot;viewport&quot;&gt;</p>
+
+<p class=MsoNormal>    &lt;div class=&quot;diagram-container&quot;&gt;</p>
+
+<p class=MsoNormal>        &lt;svg&gt;</p>
+
+<p class=MsoNormal>            &lt;path d=&quot;M 700,300 Q 500,200
+350,150&quot; class=&quot;path-blue&quot; /&gt;</p>
+
+<p class=MsoNormal>            &lt;path d=&quot;M 700,300 Q 900,200
+1050,150&quot; class=&quot;path-purple&quot; /&gt;</p>
+
+<p class=MsoNormal>            &lt;path d=&quot;M 700,300 Q 900,400
+1050,450&quot; class=&quot;path-rose&quot; /&gt;</p>
+
+<p class=MsoNormal>            &lt;path d=&quot;M 700,300 Q 500,400
+350,450&quot; class=&quot;path-amber&quot; /&gt;</p>
+
+<p class=MsoNormal>        &lt;/svg&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        &lt;div class=&quot;central-hub&quot;&gt;<span
+style='font-family:"Segoe UI Emoji",sans-serif'>&#129516;</span>&lt;/div&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        &lt;!-- Node 1 --&gt;</p>
+
+<p class=MsoNormal>        &lt;div class=&quot;node blue&quot; style=&quot;top:
+120px; left: 260px;&quot;&gt;</p>
+
+<p class=MsoNormal>            &lt;h4&gt;Dental &amp; Gum&lt;/h4&gt;</p>
+
+<p class=MsoNormal>            Caries, Periodontitis &amp; Biofilm Dynamics</p>
+
+<p class=MsoNormal>        &lt;/div&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        &lt;!-- Node 2 --&gt;</p>
+
+<p class=MsoNormal>        &lt;div class=&quot;node purple&quot;
+style=&quot;top: 120px; left: 960px;&quot;&gt;</p>
+
+<p class=MsoNormal>            &lt;h4&gt;Metabolic Axis&lt;/h4&gt;</p>
+
+<p class=MsoNormal>            HbA1c, Insulin Resistance &amp; T2D</p>
+
+<p class=MsoNormal>        &lt;/div&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        &lt;!-- Node 3 --&gt;</p>
+
+<p class=MsoNormal>        &lt;div class=&quot;node rose&quot; style=&quot;top:
+420px; left: 960px;&quot;&gt;</p>
+
+<p class=MsoNormal>            &lt;h4&gt;Lipids &amp; Pressure&lt;/h4&gt;</p>
+
+<p class=MsoNormal>            LDL, Triglycerides &amp; Hypertension</p>
+
+<p class=MsoNormal>        &lt;/div&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>        &lt;!-- Node 4 --&gt;</p>
+
+<p class=MsoNormal>        &lt;div class=&quot;node amber&quot;
+style=&quot;top: 420px; left: 260px;&quot;&gt;</p>
+
+<p class=MsoNormal>            &lt;h4&gt;Evaluation Costs&lt;/h4&gt;</p>
+
+<p class=MsoNormal>            Univariate vs Bivariate vs ML Decision Cost</p>
+
+<p class=MsoNormal>        &lt;/div&gt;</p>
+
+<p class=MsoNormal>    &lt;/div&gt;</p>
+
+<p class=MsoNormal>&lt;/div&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&lt;!-- SECTION 2: GRAPHS &amp; COMPARISONS --&gt;</p>
+
+<p class=MsoNormal>&lt;div class=&quot;section-title&quot;&gt;2. Comparative
+Analytics &amp; Statistical Models&lt;/div&gt;</p>
+
+<p class=MsoNormal>&lt;div class=&quot;grid-container&quot;&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>    &lt;!-- Chart 1: Diagnostic Accuracy Comparison --&gt;</p>
+
+<p class=MsoNormal>    &lt;div class=&quot;chart-card&quot;&gt;</p>
+
+<p class=MsoNormal>        &lt;h3&gt;Diagnostic Accuracy Across
+Models&lt;/h3&gt;</p>
+
+<p class=MsoNormal>        &lt;p&gt;Comparing Sensitivity/Accuracy across
+Univariate, Bivariate, and Decision Tree algorithms.&lt;/p&gt;</p>
+
+<p class=MsoNormal>        &lt;div class=&quot;chart-wrapper&quot;&gt;</p>
+
+<p class=MsoNormal>            &lt;canvas
+id=&quot;accuracyChart&quot;&gt;&lt;/canvas&gt;</p>
+
+<p class=MsoNormal>        &lt;/div&gt;</p>
+
+<p class=MsoNormal>    &lt;/div&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>    &lt;!-- Chart 2: Cost of Medical Evaluation --&gt;</p>
+
+<p class=MsoNormal>    &lt;div class=&quot;chart-card&quot;&gt;</p>
+
+<p class=MsoNormal>        &lt;h3&gt;Medical Evaluation Cost per Patient
+($)&lt;/h3&gt;</p>
+
+<p class=MsoNormal>        &lt;p&gt;Diagnostic cost required to establish
+disease risk profiles using different statistical approaches.&lt;/p&gt;</p>
+
+<p class=MsoNormal>        &lt;div class=&quot;chart-wrapper&quot;&gt;</p>
+
+<p class=MsoNormal>            &lt;canvas
+id=&quot;costChart&quot;&gt;&lt;/canvas&gt;</p>
+
+<p class=MsoNormal>        &lt;/div&gt;</p>
+
+<p class=MsoNormal>    &lt;/div&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>    &lt;!-- Chart 3: Disease Association Strength (Bivariate
+ORs) --&gt;</p>
+
+<p class=MsoNormal>    &lt;div class=&quot;chart-card&quot;&gt;</p>
+
+<p class=MsoNormal>        &lt;h3&gt;Periodontitis &amp; Metabolic Disease Odds
+Ratios&lt;/h3&gt;</p>
+
+<p class=MsoNormal>        &lt;p&gt;Bivariate correlation strength between
+periodontal markers and systemic diseases.&lt;/p&gt;</p>
+
+<p class=MsoNormal>        &lt;div class=&quot;chart-wrapper&quot;&gt;</p>
+
+<p class=MsoNormal>            &lt;canvas
+id=&quot;oddsRatioChart&quot;&gt;&lt;/canvas&gt;</p>
+
+<p class=MsoNormal>        &lt;/div&gt;</p>
+
+<p class=MsoNormal>    &lt;/div&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>    &lt;!-- Chart 4: Decision Tree Feature Importance --&gt;</p>
+
+<p class=MsoNormal>    &lt;div class=&quot;chart-card&quot;&gt;</p>
+
+<p class=MsoNormal>        &lt;h3&gt;Decision Tree Feature Importance (Gini
+Impurity)&lt;/h3&gt;</p>
+
+<p class=MsoNormal>        &lt;p&gt;Key predictive variables identified in
+multi-disease Decision Tree classification models.&lt;/p&gt;</p>
+
+<p class=MsoNormal>        &lt;div class=&quot;chart-wrapper&quot;&gt;</p>
+
+<p class=MsoNormal>            &lt;canvas id=&quot;featureImportanceChart&quot;&gt;&lt;/canvas&gt;</p>
+
+<p class=MsoNormal>        &lt;/div&gt;</p>
+
+<p class=MsoNormal>    &lt;/div&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&lt;/div&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&lt;script&gt;</p>
+
+<p class=MsoNormal>    Chart.defaults.color = '#9ca3af';</p>
+
+<p class=MsoNormal>    Chart.defaults.borderColor = '#1f2937';</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>    // 1. Accuracy Comparison</p>
+
+<p class=MsoNormal>    new Chart(document.getElementById('accuracyChart'), {</p>
+
+<p class=MsoNormal>        type: 'bar',</p>
+
+<p class=MsoNormal>        data: {</p>
+
+<p class=MsoNormal>            labels: ['Dental Caries', 'Gum Disease',
+'Metabolic (T2D)', 'Blood Pressure / Lipids'],</p>
+
+<p class=MsoNormal>            datasets: [</p>
+
+<p class=MsoNormal>                { label: 'Univariate Stats', data: [62, 58,
+65, 60], backgroundColor: '#38bdf8' },</p>
+
+<p class=MsoNormal>                { label: 'Bivariate Stats', data: [75, 72,
+78, 74], backgroundColor: '#f59e0b' },</p>
+
+<p class=MsoNormal>                { label: 'Decision Tree (ML)', data: [91,
+88, 94, 92], backgroundColor: '#a855f7' }</p>
+
+<p class=MsoNormal>            ]</p>
+
+<p class=MsoNormal>        },</p>
+
+<p class=MsoNormal>        options: { responsive: true, maintainAspectRatio:
+false }</p>
+
+<p class=MsoNormal>    });</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>    // 2. Cost Chart</p>
+
+<p class=MsoNormal>    new Chart(document.getElementById('costChart'), {</p>
+
+<p class=MsoNormal>        type: 'line',</p>
+
+<p class=MsoNormal>        data: {</p>
+
+<p class=MsoNormal>            labels: ['Basic Biomarkers', 'Paired
+Correlation', 'Full Screening Panel', 'ML Pipeline Setup'],</p>
+
+<p class=MsoNormal>            datasets: [</p>
+
+<p class=MsoNormal>                { label: 'Univariate Evaluation', data: [25,
+40, 60, 80], borderColor: '#38bdf8', tension: 0.3 },</p>
+
+<p class=MsoNormal>                { label: 'Bivariate Cross-Testing', data:
+[60, 110, 150, 190], borderColor: '#f59e0b', tension: 0.3 },</p>
+
+<p class=MsoNormal>                { label: 'Decision Tree Multi-Panel', data:
+[150, 280, 450, 650], borderColor: '#f43f5e', tension: 0.3 }</p>
+
+<p class=MsoNormal>            ]</p>
+
+<p class=MsoNormal>        },</p>
+
+<p class=MsoNormal>        options: { responsive: true, maintainAspectRatio:
+false }</p>
+
+<p class=MsoNormal>    });</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>    // 3. Odds Ratio Chart</p>
+
+<p class=MsoNormal>    new Chart(document.getElementById('oddsRatioChart'), {</p>
+
+<p class=MsoNormal>        type: 'radar',</p>
+
+<p class=MsoNormal>        data: {</p>
+
+<p class=MsoNormal>            labels: ['Periodontitis', 'Elevated HbA1c',
+'High LDL', 'Systolic BP &gt;140', 'Triglycerides'],</p>
+
+<p class=MsoNormal>            datasets: [</p>
+
+<p class=MsoNormal>                { label: 'Metabolic Syndrome Cohort', data:
+[3.2, 4.5, 3.8, 2.9, 3.6], borderColor: '#f43f5e', backgroundColor: 'rgba(244,
+63, 94, 0.2)' },</p>
+
+<p class=MsoNormal>                { label: 'Control Population', data: [1.0,
+1.0, 1.0, 1.0, 1.0], borderColor: '#38bdf8', backgroundColor: 'rgba(56, 189,
+248, 0.2)' }</p>
+
+<p class=MsoNormal>            ]</p>
+
+<p class=MsoNormal>        },</p>
+
+<p class=MsoNormal>        options: { responsive: true, maintainAspectRatio:
+false }</p>
+
+<p class=MsoNormal>    });</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>    // 4. Feature Importance</p>
+
+<p class=MsoNormal>    new
+Chart(document.getElementById('featureImportanceChart'), {</p>
+
+<p class=MsoNormal>        type: 'bar',</p>
+
+<p class=MsoNormal>        data: {</p>
+
+<p class=MsoNormal>            labels: ['HbA1c Level', 'Periodontal Pocket
+Depth', 'Systolic BP', 'Triglycerides / HDL Ratio', 'Fasting Blood Glucose'],</p>
+
+<p class=MsoNormal>            datasets: [{</p>
+
+<p class=MsoNormal>                label: 'Gini Importance Score',</p>
+
+<p class=MsoNormal>                data: [0.35, 0.24, 0.18, 0.14, 0.09],</p>
+
+<p class=MsoNormal>                backgroundColor: ['#a855f7', '#f59e0b',
+'#38bdf8', '#f43f5e', '#10b981']</p>
+
+<p class=MsoNormal>            }]</p>
+
+<p class=MsoNormal>        },</p>
+
+<p class=MsoNormal>        options: { indexAxis: 'y', responsive: true,
+maintainAspectRatio: false }</p>
+
+<p class=MsoNormal>    });</p>
+
+<p class=MsoNormal>&lt;/script&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&lt;/body&gt;</p>
+
+<p class=MsoNormal>&lt;/html&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+</div>
+
+</body>
+
+</html>

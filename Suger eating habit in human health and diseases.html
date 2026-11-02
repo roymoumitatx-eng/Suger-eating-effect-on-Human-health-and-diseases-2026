@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Analytics & Decision Tree Dashboard</title>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #080c14;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            padding: 24px;
+            min-height: 100vh;
+        }
+
+        header {
+            margin-bottom: 24px;
+            border-bottom: 1px solid #1f2937;
+            padding-bottom: 16px;
+        }
+
+        header h1 {
+            font-size: 22px;
+            color: #38bdf8;
+            margin-bottom: 6px;
+        }
+
+        header p {
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        /* Section Navigation Tabs */
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #f59e0b;
+            margin: 32px 0 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid #f59e0b;
+            padding-left: 10px;
+        }
+
+        /* Mental Map Container */
+        .viewport {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            background: radial-gradient(circle at center, #0f172a 0%, #080c14 85%);
+            border: 1px solid #1f2937;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .diagram-container {
+            position: absolute;
+            width: 1400px;
+            height: 600px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .central-hub {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            box-shadow: 0 0 35px rgba(56, 189, 248, 0.4);
+        }
+
+        .node {
+            position: absolute;
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 12px;
+            text-align: center;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+            max-width: 180px;
+            z-index: 5;
+        }
+
+        .node.blue { border-color: #38bdf8; color: #bae6fd; }
+        .node.purple { border-color: #a855f7; color: #e9d5ff; }
+        .node.amber { border-color: #f59e0b; color: #fde68a; }
+        .node.rose { border-color: #f43f5e; color: #fecdd3; }
+
+        .node h4 { font-size: 10px; text-transform: uppercase; margin-bottom: 4px; opacity: 0.8; }
+
+        svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        path { stroke: #1f2937; stroke-width: 2; fill: none; }
+        .path-blue { stroke: rgba(56, 189, 248, 0.4); }
+        .path-purple { stroke: rgba(168, 85, 247, 0.4); }
+        .path-amber { stroke: rgba(245, 158, 11, 0.4); }
+        .path-rose { stroke: rgba(244, 63, 94, 0.4); }
+
+        /* Grid for Graphs */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 20px;
+        }
+
+        .chart-card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+        }
+
+        .chart-card h3 {
+            font-size: 14px;
+            color: #38bdf8;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .chart-card p {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-bottom: 16px;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 260px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🩺 Multi-Disease Analytics Dashboard</h1>
+    <p>Comparing Univariate, Bivariate, and Decision Tree Models across Dental, Metabolic, Blood Lipid/Pressure Diseases, and Diagnostic Evaluation Costs.</p>
+</header>
+
+<!-- SECTION 1: MENTAL MAP -->
+<div class="section-title">1. Disease & Statistical Method Mental Map</div>
+<div class="viewport">
+    <div class="diagram-container">
+        <svg>
+            <path d="M 700,300 Q 500,200 350,150" class="path-blue" />
+            <path d="M 700,300 Q 900,200 1050,150" class="path-purple" />
+            <path d="M 700,300 Q 900,400 1050,450" class="path-rose" />
+            <path d="M 700,300 Q 500,400 350,450" class="path-amber" />
+        </svg>
+
+        <div class="central-hub">🧬</div>
+
+        <!-- Node 1 -->
+        <div class="node blue" style="top: 120px; left: 260px;">
+            <h4>Dental & Gum</h4>
+            Caries, Periodontitis & Biofilm Dynamics
+        </div>
+
+        <!-- Node 2 -->
+        <div class="node purple" style="top: 120px; left: 960px;">
+            <h4>Metabolic Axis</h4>
+            HbA1c, Insulin Resistance & T2D
+        </div>
+
+        <!-- Node 3 -->
+        <div class="node rose" style="top: 420px; left: 960px;">
+            <h4>Lipids & Pressure</h4>
+            LDL, Triglycerides & Hypertension
+        </div>
+
+        <!-- Node 4 -->
+        <div class="node amber" style="top: 420px; left: 260px;">
+            <h4>Evaluation Costs</h4>
+            Univariate vs Bivariate vs ML Decision Cost
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 2: GRAPHS & COMPARISONS -->
+<div class="section-title">2. Comparative Analytics & Statistical Models</div>
+<div class="grid-container">
+
+    <!-- Chart 1: Diagnostic Accuracy Comparison -->
+    <div class="chart-card">
+        <h3>Diagnostic Accuracy Across Models</h3>
+        <p>Comparing Sensitivity/Accuracy across Univariate, Bivariate, and Decision Tree algorithms.</p>
+        <div class="chart-wrapper">
+            <canvas id="accuracyChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Chart 2: Cost of Medical Evaluation -->
+    <div class="chart-card">
+        <h3>Medical Evaluation Cost per Patient ($)</h3>
+        <p>Diagnostic cost required to establish disease risk profiles using different statistical approaches.</p>
+        <div class="chart-wrapper">
+            <canvas id="costChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Chart 3: Disease Association Strength (Bivariate ORs) -->
+    <div class="chart-card">
+        <h3>Periodontitis & Metabolic Disease Odds Ratios</h3>
+        <p>Bivariate correlation strength between periodontal markers and systemic diseases.</p>
+        <div class="chart-wrapper">
+            <canvas id="oddsRatioChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Chart 4: Decision Tree Feature Importance -->
+    <div class="chart-card">
+        <h3>Decision Tree Feature Importance (Gini Impurity)</h3>
+        <p>Key predictive variables identified in multi-disease Decision Tree classification models.</p>
+        <div class="chart-wrapper">
+            <canvas id="featureImportanceChart"></canvas>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    Chart.defaults.color = '#9ca3af';
+    Chart.defaults.borderColor = '#1f2937';
+
+    // 1. Accuracy Comparison
+    new Chart(document.getElementById('accuracyChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Dental Caries', 'Gum Disease', 'Metabolic (T2D)', 'Blood Pressure / Lipids'],
+            datasets: [
+                { label: 'Univariate Stats', data: [62, 58, 65, 60], backgroundColor: '#38bdf8' },
+                { label: 'Bivariate Stats', data: [75, 72, 78, 74], backgroundColor: '#f59e0b' },
+                { label: 'Decision Tree (ML)', data: [91, 88, 94, 92], backgroundColor: '#a855f7' }
+            ]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // 2. Cost Chart
+    new Chart(document.getElementById('costChart'), {
+        type: 'line',
+        data: {
+            labels: ['Basic Biomarkers', 'Paired Correlation', 'Full Screening Panel', 'ML Pipeline Setup'],
+            datasets: [
+                { label: 'Univariate Evaluation', data: [25, 40, 60, 80], borderColor: '#38bdf8', tension: 0.3 },
+                { label: 'Bivariate Cross-Testing', data: [60, 110, 150, 190], borderColor: '#f59e0b', tension: 0.3 },
+                { label: 'Decision Tree Multi-Panel', data: [150, 280, 450, 650], borderColor: '#f43f5e', tension: 0.3 }
+            ]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // 3. Odds Ratio Chart
+    new Chart(document.getElementById('oddsRatioChart'), {
+        type: 'radar',
+        data: {
+            labels: ['Periodontitis', 'Elevated HbA1c', 'High LDL', 'Systolic BP >140', 'Triglycerides'],
+            datasets: [
+                { label: 'Metabolic Syndrome Cohort', data: [3.2, 4.5, 3.8, 2.9, 3.6], borderColor: '#f43f5e', backgroundColor: 'rgba(244, 63, 94, 0.2)' },
+                { label: 'Control Population', data: [1.0, 1.0, 1.0, 1.0, 1.0], borderColor: '#38bdf8', backgroundColor: 'rgba(56, 189, 248, 0.2)' }
+            ]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // 4. Feature Importance
+    new Chart(document.getElementById('featureImportanceChart'), {
+        type: 'bar',
+        data: {
+            labels: ['HbA1c Level', 'Periodontal Pocket Depth', 'Systolic BP', 'Triglycerides / HDL Ratio', 'Fasting Blood Glucose'],
+            datasets: [{
+                label: 'Gini Importance Score',
+                data: [0.35, 0.24, 0.18, 0.14, 0.09],
+                backgroundColor: ['#a855f7', '#f59e0b', '#38bdf8', '#f43f5e', '#10b981']
+            }]
+        },
+        options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false }
+    });
+</script>
+
+</body>
+</html>
